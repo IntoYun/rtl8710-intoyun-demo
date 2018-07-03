@@ -9,5 +9,9 @@ ctags
 tags
 
 # 临时文件
-build
+*.dep
+*.ewt
+project/tmp.board
+project/Debug
+project/settings
 

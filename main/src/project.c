@@ -22,8 +22,8 @@
 
 const static char *TAG = "user:project";
 
-#define DEVICE_ID_DEF                   "0ehd4spfh000000000000bd8"         //设备标识
-#define DEVICE_SECRET_DEF               "6c274e522c82968ca7df7f67caa58b41" //设备密钥
+#define DEVICE_ID_DEF                   "0dvo0bdoy00000000000068f"         //设备标识
+#define DEVICE_SECRET_DEF               "c08e66a8b08fd8436dac0dce9cc3bca9" //设备密钥
 
 #define DPID_BOOL_SWITCH                1  //布尔型            开关
 #define DPID_DOUBLE_ILLUMINATION        2  //数值型            光照强度
@@ -109,6 +109,5 @@ int userMain(void)
         userHandle();
         System.loop();
     }
-    return 0;
 }
 
