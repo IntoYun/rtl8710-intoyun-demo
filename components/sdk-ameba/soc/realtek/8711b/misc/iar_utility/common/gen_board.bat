@@ -13,19 +13,19 @@
 @echo ^<flash_board^> >> tmp.board
 @echo   ^<pass^> >> tmp.board
 @echo   	^<range^>CODE %3 0x%end1%^</range^> >> tmp.board
-@echo     ^<loader^>$PROJ_DIR$\..\..\..\component\soc\realtek\8195a\misc\iar_utility\common\flashloader\FlashRTL8195aMP.flash^</loader^>    >> tmp.board
+@echo     ^<loader^>$PROJ_DIR$\..\components\sdk-ameba\soc\realtek\8195a\misc\iar_utility\common\flashloader\FlashRTL8195aMP.flash^</loader^>    >> tmp.board
 @echo     ^<abs_offset^>0x00000000^</abs_offset^>  >> tmp.board
 @echo     ^<args^>--head^</args^>  >> tmp.board
 @echo   ^</pass^> >> tmp.board
 @echo   ^<pass^> >> tmp.board
 @echo   	^<range^>CODE %1 0x%end2%^</range^> >> tmp.board
-@echo     ^<loader^>$PROJ_DIR$\..\..\..\component\soc\realtek\8195a\misc\iar_utility\common\flashloader\FlashRTL8195aMP.flash^</loader^>    >> tmp.board
+@echo     ^<loader^>$PROJ_DIR$\..\components\sdk-ameba\soc\realtek\8195a\misc\iar_utility\common\flashloader\FlashRTL8195aMP.flash^</loader^>    >> tmp.board
 @echo     ^<abs_offset^>0x00000000^</abs_offset^> >> tmp.board
 @echo     ^<args^>--cascade^</args^>  >> tmp.board
 @echo   ^</pass^>  >> tmp.board
 @echo   ^<pass^>    >> tmp.board
 @echo   	^<range^>CODE 0x30000000 0x301FFFFF^</range^>    >> tmp.board
-@echo     ^<loader^>$PROJ_DIR$\..\..\..\component\soc\realtek\8195a\misc\iar_utility\common\flashloader\FlashRTL8195aMP.flash^</loader^>    >> tmp.board    
+@echo     ^<loader^>$PROJ_DIR$\..\components\sdk-ameba\soc\realtek\8195a\misc\iar_utility\common\flashloader\FlashRTL8195aMP.flash^</loader^>    >> tmp.board    
 @echo     ^<abs_offset^>0x00000000^</abs_offset^>    >> tmp.board 
 @echo     ^<args^>--cascade^</args^>  >> tmp.board
 @echo   ^</pass^>    >> tmp.board

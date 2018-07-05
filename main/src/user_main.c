@@ -17,17 +17,42 @@
  */
 
 #include "iot_export.h"
+#include "device.h"
+#include "wifi_constants.h"
+#include "lwip_netconf.h"
+
+//#define CONFIG_WIFI_SSID      "TP-LINK_3816"
+#define CONFIG_WIFI_SSID      "MOLMC_HUAWEI"
+#define CONFIG_WIFI_PASSWORD  "26554422"
 
 extern int userMain(void);
 
+static void intoyun_iot_task(void *param)
+{
+    vTaskDelay(2000);	
+    if(wifi_connect(CONFIG_WIFI_SSID, RTW_SECURITY_WPA2_AES_PSK, \
+            CONFIG_WIFI_PASSWORD, strlen(CONFIG_WIFI_SSID), strlen(CONFIG_WIFI_PASSWORD), -1, NULL) == RTW_SUCCESS) {
+        LwIP_DHCP(0, DHCP_START);
+        Network.setState(IOTX_NETWORK_STATE_CONNECTED);
+    }
+
+    userMain();
+}
+
 int main(void)
 {
+    //blink();
+    //ReRegisterPlatformLogUart();
+    wlan_network();  
+
     Log.setLogLevel("*", MOLMC_LOG_VERBOSE);
     Log.setLogLevel("user:project", MOLMC_LOG_VERBOSE);
     Log.setLogLevel("user:ota", MOLMC_LOG_VERBOSE);
 
-    Network.setState(IOTX_NETWORK_STATE_CONNECTED);
-    userMain();
-    return 0;
+	if(xTaskCreate(intoyun_iot_task, (char const *)"intoyun_iot_task", 4096 * 2, NULL, tskIDLE_PRIORITY + 1, NULL) != pdPASS){
+		printf("\n\r[%s] Create update task failed", __FUNCTION__);
+	}
+
+	vTaskStartScheduler();
 }
 

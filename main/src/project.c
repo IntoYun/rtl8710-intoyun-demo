@@ -19,6 +19,8 @@
 #include "iot_export.h"
 #include "project_config.h"
 #include "ota_update.h"
+#include "gpio_api.h"   // mbed
+
 
 const static char *TAG = "user:project";
 
@@ -28,10 +30,13 @@ const static char *TAG = "user:project";
 #define DPID_BOOL_SWITCH                1  //布尔型            开关
 #define DPID_DOUBLE_ILLUMINATION        2  //数值型            光照强度
 
+#define GPIO_LED_PIN                    PA_0
+
 bool dpBoolSwitch;                      // 开关
 double dpDoubleIllumination = 100;      // 光照强度
 
 uint32_t timerID;
+gpio_t gpio_led;
 
 void eventProcess(int event, int param, uint8_t *data, uint32_t datalen)
 {
@@ -40,6 +45,11 @@ void eventProcess(int event, int param, uint8_t *data, uint32_t datalen)
             case ep_cloud_comm_data:
                 if (RESULT_DATAPOINT_NEW == Cloud.readDatapointBool(DPID_BOOL_SWITCH, &dpBoolSwitch)) {
                     MOLMC_LOGI(TAG, "dpBoolSwitch = %d", dpBoolSwitch);
+                    if(dpBoolSwitch) {
+                        gpio_write(&gpio_led, 0);
+                    } else {
+                        gpio_write(&gpio_led, 1);
+                    }
                 }
                 break;
             case ep_cloud_comm_ota:
@@ -87,6 +97,12 @@ void userInit(void)
     /*************此处修改和添加用户初始化代码**************/
     Cloud.connect();
     timerID = timerGetId();
+
+    //初始化led管脚
+    gpio_init(&gpio_led, GPIO_LED_PIN);
+    gpio_dir(&gpio_led, PIN_OUTPUT);    // Direction: Output
+    gpio_mode(&gpio_led, PullNone);     // No pull
+    gpio_write(&gpio_led, 1);           
     /*******************************************************/
 }
 

@@ -1,4 +1,4 @@
-# 平台相关隐藏文件
+﻿# 平台相关隐藏文件
 .DS_Store
 
 # gtags相关文件
@@ -14,4 +14,5 @@ tags
 project/tmp.board
 project/Debug
 project/settings
+si
 

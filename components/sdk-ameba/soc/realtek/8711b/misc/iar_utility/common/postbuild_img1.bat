@@ -1,6 +1,6 @@
 cd /D %2
-set tooldir=%2\..\..\..\component\soc\realtek\8711b\misc\iar_utility\common\tools
-set libdir=%2\..\..\..\component\soc\realtek\8711b\misc\bsp
+set tooldir=%2\..\components\sdk-ameba\soc\realtek\8711b\misc\iar_utility\common\tools
+set libdir=%2\..\components\sdk-ameba\soc\realtek\8711b\misc\bsp
 
 del Debug\Exe\bootloader.map Debug\Exe\bootloader.asm *.bin
 cmd /c "%tooldir%\nm Debug/Exe/bootloader.axf | %tooldir%\sort > Debug/Exe/bootloader.map"

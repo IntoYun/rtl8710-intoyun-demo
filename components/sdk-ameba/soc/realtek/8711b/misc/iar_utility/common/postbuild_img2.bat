@@ -1,6 +1,6 @@
 cd /D %2
-set tooldir=%2\..\..\..\component\soc\realtek\8711b\misc\iar_utility\common\tools
-set libdir=%2\..\..\..\component\soc\realtek\8711b\misc\bsp
+set tooldir=%2\..\components\sdk-ameba\soc\realtek\8711b\misc\iar_utility\common\tools
+set libdir=%2\..\components\sdk-ameba\soc\realtek\8711b\misc\bsp
 set ota_bin_ver=0x%date:~0,4%%date:~5,2%%date:~8,2%
 
 ::echo input1=%1 >tmp.txt
