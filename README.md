@@ -22,5 +22,5 @@ git clone --recursive https://github.com/IntoYun/rtl8710-intoyun-demo.git
 
 ## 开发环境搭建
 
-该项目工程使用`ESP8266_RTOS_SDK`开发。开发请点击[开发环境搭建和编译使用](https://github.com/espressif/ESP8266_RTOS_SDK)
+该项目工程使用IAR工具开发。
 
