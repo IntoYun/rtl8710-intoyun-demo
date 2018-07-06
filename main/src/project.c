@@ -19,13 +19,15 @@
 #include "iot_export.h"
 #include "project_config.h"
 #include "ota_update.h"
+#include "device.h"
 #include "gpio_api.h"   // mbed
-
+#include "analogin_api.h"
 
 const static char *TAG = "user:project";
 
 #define DEVICE_ID_DEF                   "0dvo0bdoy00000000000068f"         //设备标识
 #define DEVICE_SECRET_DEF               "c08e66a8b08fd8436dac0dce9cc3bca9" //设备密钥
+
 
 #define DPID_BOOL_SWITCH                1  //布尔型            开关
 #define DPID_DOUBLE_ILLUMINATION        2  //数值型            光照强度
@@ -106,13 +108,28 @@ void userInit(void)
     /*******************************************************/
 }
 
+/* Vbat channel */
+#define OFFSET		0x492							
+double getLightSensor(void)
+{
+	uint16_t adc_read = 0;
+	analogin_t   adc_vbat;
+
+	analogin_init(&adc_vbat, AD_2);
+    adc_read = (analogin_read_u16(&adc_vbat) >> 4) - OFFSET ;
+	analogin_deinit(&adc_vbat);
+
+    MOLMC_LOGI(TAG, "adc_read = %d\n", adc_read); 
+    return adc_read;
+}
+
 void userHandle(void)
 {
     if(Cloud.connected()) {
         if(timerIsEnd(timerID, 10000)) {
             timerID = timerGetId();
-
-            dpDoubleIllumination += 1;
+            
+            dpDoubleIllumination = getLightSensor();
             Cloud.writeDatapointNumberDouble(DPID_DOUBLE_ILLUMINATION, dpDoubleIllumination);
         }
     }
