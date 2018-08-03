@@ -22,5 +22,5 @@ git clone --recursive https://github.com/IntoYun/rtl8710-intoyun-demo.git
 
 ## 开发环境搭建
 
-该项目工程使用IAR工具开发。
+该项目工程使用IAR工具(8.20以上版本)开发。
 
